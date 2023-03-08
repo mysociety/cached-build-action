@@ -1,6 +1,6 @@
 name: 'Cached build'
 description: 'Assuming a top-level Dockerfile and docker-compose, build cached images to the current repo register'
-version: 1.0.0
+version: 1.0.1
 
 inputs:
   registry: 
@@ -40,7 +40,7 @@ runs:
 
   - name: Extract metadata (tags, labels) for Docker
     id: meta
-    uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+    uses: docker/metadata-action@507c2f2dc502c992ad446e3d7a5dfbe311567a96 # v4.3.0
     with:
       images: ${{ inputs.registry }}/${{ github.repository }}
       tags: |
