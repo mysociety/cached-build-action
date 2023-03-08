@@ -1,0 +1,52 @@
+# From https://raw.githubusercontent.com/simonw/python-lib-template-repository/main/.github/workflows/setup.yml
+name: Execute template to populate repository
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  contents: write
+
+jobs:
+
+  tidy-meta-template:
+    if: ${{ endsWith(github.repository, '-auto-template') && github.repository != 'ajparsons/base-auto-template'  }}
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Ensure right repo referenced in urls in readme
+        shell: bash
+        run: |
+          sed -i "s#$BASE_NAME#$GITHUB_REPOSITORY#g" README.md
+        env:
+          BASE_NAME: ajparsons/base-auto-template
+
+      - name: Update readme
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Update urls in readme for new template"
+
+  setup-repo:
+    if: ${{ !endsWith(github.repository, '-auto-template')  }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          ref: ${{ github.head_ref }}
+
+      - uses: ajparsons/github-template-setup@v0.1.5
+        name: Setup repo
+
+      - name: Force push new repo contents
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Initial library structure"
+          push_options: --force
