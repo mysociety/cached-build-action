@@ -1,7 +1,6 @@
 name: 'Cached build'
 description: 'Assuming a top-level Dockerfile and docker-compose, build cached images to the current repo register'
 version: 1.0.0
-description: 'Assuming a top-level Dockerfile and docker-compose, build cached images to the current repo register'
 
 inputs:
   registry: 
@@ -34,10 +33,10 @@ runs:
   using: "composite"
   steps:
 
-    - name: Test if this action is being referenced safely
-      uses: ajparsons/sha-version-warning@41005e65e1589d6267837e9959a5b4aabc55ddf8 # v1.0.2
-      with: 
-        action_path: ${{ github.action_path }}
+  - name: Test if this action is being referenced safely
+    uses: ajparsons/sha-version-warning@41005e65e1589d6267837e9959a5b4aabc55ddf8 # v1.0.2
+    with: 
+      action_path: ${{ github.action_path }}
 
   - name: Extract metadata (tags, labels) for Docker
     id: meta
