@@ -1,6 +1,6 @@
 # Cached build
 
-Version: 1.0.1
+Version: 1.0.2
 
 Assuming a top-level Dockerfile and docker-compose, build cached images to the current repo register
 
@@ -8,7 +8,7 @@ Assuming a top-level Dockerfile and docker-compose, build cached images to the c
 
 ```yaml
 
-- uses: mysociety/cached-build-action@b82a169a68294951c527b14e138771e69c8c492f # v1.0.1
+- uses: mysociety/cached-build-action@v1.0.2 # Replace with commit hash for safety
   id: example-step 
   with:
     registry: 'ghcr.io'  # default
