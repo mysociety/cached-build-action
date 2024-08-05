@@ -8,7 +8,7 @@ Assuming a top-level Dockerfile and docker-compose, build cached images to the c
 
 ```yaml
 
-- uses: mysociety/cached-build-action@v1.0.2 # Replace with commit hash for safety
+- uses: mysociety/cached-build-action@2decf4a795196610d5507719fbe6dc78fed7ad18 # v1.0.2
   id: example-step 
   with:
     registry: 'ghcr.io'  # default
